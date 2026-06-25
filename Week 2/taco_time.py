@@ -1,3 +1,6 @@
+# Author: Erik Rumppe
+# Date: 6/25/2026
+
 tortilla = True
 meat = "beef"
 cheese = True
