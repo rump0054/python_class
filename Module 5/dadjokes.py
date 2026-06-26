@@ -2,12 +2,13 @@
 # Date: 6/25/2026
 
 import random
-import os
 import pyinputplus as pyip
+from pathlib import Path
 
-# Create dad_jokes list using external txt file to populate the list
-# As long as you are running this out of the correct folder, it should find the file which needs to be ANSI
-jokes_file_path = os.getcwd() + "\\jokes_ansi.txt"
+# Create dad_jokes list using external txt file to populate the list (must be ANSI encoded)
+# As long as you are running this script out of the same directory the file is in it will work
+script_dir = Path(__file__).parent
+jokes_file_path = script_dir / "jokes_ansi.txt"
 
 with open(jokes_file_path, 'r') as file:
     dad_jokes = [line.rstrip() for line in file]
@@ -26,11 +27,15 @@ while True:
     for i in range(4):
         print(random.choice(dad_jokes))
 
-    # Ask if the user wants to see more jokes. 
+    # Ask if the user wants to see another joke. 
     # If they do not want to continue, break out of the while loop otherwise restart loop by default
-    play_again = pyip.inputChoice(['yes', 'no'], prompt='Would you like to see more jokes? (yes/no) ')
-    if play_again.lower() == 'no':
-        break
+    while True:
+        play_again = pyip.inputChoice(['yes', 'no'], prompt='\nWould you like to see another joke? (yes/no): ')
+        if play_again.lower() == 'yes':
+            print(random.choice(dad_jokes))
+        else:
+            break
+    break
 
 # Thank the user
 print("Thank you for using the Dad Jokes Randomizer!")
