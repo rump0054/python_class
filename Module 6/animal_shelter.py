@@ -31,7 +31,7 @@ def adopt_animal(name, animals):
 def get_animal_count(animals):
     return len(animals)
 
-# Method returns boolean if it finds the key in the dictonary 
+# Method returns boolean if it finds the key in the dictionary
 def find_animal(name, animals):
     if name in animals:
         return True

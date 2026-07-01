@@ -19,12 +19,15 @@ if meal_choice.lower() == "sandwich":
     meal_price = SANDWICH_PRICE
 elif meal_choice.lower() == "platter":
     meal_price = PLATTER_PRICE
+# Added else to force a price no matter what
+else:
+    meal_price = SANDWICH_PRICE
 
-# Get customer meal count greater than 0 with automatic error handling for non integer numbers then calculate toal_cost of meals
+# Get customer meal count greater than 0 with automatic error handling for noninteger numbers then calculate total_cost of meals
 num_meals = pyip.inputInt(prompt="How many meals do you want? ", greaterThan=0)
 total_cost = meal_price * num_meals
 
-# Get customer choice on extra sauce with with automatic error handling for incorrect input then recalculate total_cost
+# Get customer choice on extra sauce with  automatic error handling for incorrect input then recalculate total_cost
 # based on customer selection
 extra_sauce = pyip.inputChoice(['yes', 'no'], prompt='Do you want extra sauce? (yes/no): ')
 if extra_sauce.lower() == "yes":

@@ -37,5 +37,5 @@ while True:
             break
     break
 
-# Thank the user
+# Thanks to the user
 print("Thank you for using the Dad Jokes Randomizer!")

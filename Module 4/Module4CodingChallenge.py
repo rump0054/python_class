@@ -32,7 +32,7 @@ while True:
             print("You WON!  Amazing job!")
             print("The secret number was: " + str(secret_number))
             break
-        # If the guess is incorrect AND user still has more chances to guess remainging, give incorrect try again message
+        # If the guess is incorrect AND user still has more chances to guess remaining, give incorrect try again message
         # and give hints (too high/too low)
         elif guess_counter < 6:
             print("That is incorrect!  Try again!")

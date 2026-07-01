@@ -1,8 +1,6 @@
 # Author: Erik Rumppe
 # Date: 6/25/2026
 
-import random
-
 # Changed fuel to 70 from initial 100
 fuel = 70
 planets_visited = 0

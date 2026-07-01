@@ -8,7 +8,7 @@ FRIES_PRICE = 2.49
 DRINK_PRICE = 1.29
 
 def add_ingredient(ingredient):
-# Adds an ingredient to the virtual burger. 
+# Adds an ingredient to the virtual burger.
   print("Adding " + ingredient + " to your burger!")
 
 # Example usage
@@ -47,14 +47,14 @@ def order_decision():
 # Example usage
 order_decision()
 
-# Recusion example
+# Recursion example
 def order_food(menu):
 
-      # Checks if the menu list is empty       
+      # Checks if the menu list is empty
     if not menu:
         print("Your order is complete. Enjoy your meal!")
         return
-    else:   # If the menu list is not empty, prompt the user to order       
+    else:   # If the menu list is not empty, prompt the user to order
         print("Would you like to order a " + menu.pop(0) + "?") #remove an item from the list
         input()
         order_food(menu)    # The function calls itself
