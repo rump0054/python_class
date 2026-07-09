@@ -1,4 +1,4 @@
-import questionary
+'''import questionary
 
 activity = questionary.select(
     "What would you like to do?",
@@ -25,4 +25,26 @@ def validate_age(text):
 age = questionary.text(
     "How old are you?",
     validate=validate_age
-).ask()
+).ask()'''
+from rich.console import Console
+from rich.panel import Panel
+
+console = Console()
+
+
+def show_fancy_banner():
+    banner_text = "[bold cyan]MY TOOL[/bold cyan]\n[dim]The ultimate developer utility v1.0[/dim]"
+
+    # Wraps the banner inside a colored box panel
+    console.print(
+        Panel(
+            banner_text,
+            expand=False,
+            border_style="magenta",
+            title="[yellow]Startup[/yellow]"
+        )
+    )
+
+
+if __name__ == "__main__":
+    show_fancy_banner()
