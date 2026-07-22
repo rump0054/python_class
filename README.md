@@ -10,7 +10,7 @@ code for examples and playgrounds for miscellaneous modules.
 This project uses external modules and has a virtual environment configured for easy use.
 To load the virtual environment, start at the top folder and run the following in your terminal:
 
-`.venv\Scripts\activate`
+`venv\Scripts\activate`
 
 ## Module List
 

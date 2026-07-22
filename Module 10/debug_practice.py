@@ -2,6 +2,8 @@
 # Date: 7/22/2026
 
 def calculate_average(numbers):
+    if not numbers:
+        return 0   # Return 0 for empty list
     total = 0
     for num in numbers:
         total += num

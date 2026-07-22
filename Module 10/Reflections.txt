@@ -1,0 +1,19 @@
+How did the debugger help you understand the flow of the program?
+
+The debugger lets you step through the execution of the code step by step and watch as variables are set and changed
+and as methods are called or looped.  It is very helpful to be able to watch the code execute in real time as it is
+interpreted without have to wait for the entire program to crash or stop execution.
+
+
+What advantages does this method have over using print statements?
+
+You don't have to wait for the program to execute all the way to a print statement.  You don't have to actually code
+print statements.  You don't have to know exactly what to code in your print statements to fnd out what is causing
+a problem.
+
+
+Can you think of a real-world project where these debugging skills would be useful?
+
+Every single web application/project I've ever done where there are so many different layers running from webserver
+requests/responses to OS calls to database drivers to the runtime environment making all the different calls.
+Being able to just step through all the different layers as they move is very very very useful!
