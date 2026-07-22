@@ -28,7 +28,7 @@ age = questionary.text(
 ).ask()'''
 from rich.console import Console
 from rich.panel import Panel
-
+questionary
 console = Console()
 
 
