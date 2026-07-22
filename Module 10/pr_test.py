@@ -1,6 +1,3 @@
-# Author: Erik Rumppe
-# Date: 7/22/2026
-
 """
 This program asks the user for input and then prints that many powers of two.
 
@@ -26,10 +23,7 @@ def get_positive_integer_input(question_string):
 
 def powers_of_2(amount):
     """returns some number of powers of two"""
-    # build the list of powers of 2
-    p_of_2 = []
-    for x in range(1, amount + 1):
-        p_of_2.append(2**x)
+    p_of_2 = [2**x for x in range(1, amount + 1)]
     return p_of_2
 
 # loop until the user quits
