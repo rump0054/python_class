@@ -3,10 +3,12 @@
 
 import csv
 import sys
+import pyinputplus as pyip
 
 # Constants
 SAVE_FILE = "save.txt"
 
+# Class GameState
 class GameState:
     # init method with attempts to apply data conversion at instantiation
     # Throws errors if invalid params and hard exits as error must be fatal
@@ -17,10 +19,10 @@ class GameState:
             self.level = int(level)
             self.lives = int(lives)
         except ValueError:
-            print("Fatal: Game state error.  Parms must be integers.  Delete save file.")
+            print("Fatal: Game state error.  Parms must be positive integers.")
             sys.exit()
         except TypeError:
-            print("Fatal: Game state error.  Parms must be integers.  Delete save file.")
+            print("Fatal: Game state error.  Parms must be positive integers.")
             sys.exit()
 
     def __str__(self):
@@ -48,40 +50,58 @@ class GameState:
 
         self.lives = tmp_lives + amount
 
-
 def load_game(file_name):
     # Loading the data from a file and build the GameState object.
-    # If file not found, creates file and writes default game save and creates default GameState.
+    # If file not found, creates file, writes default game save, and creates default GameState.
     # Returns GameState.
     try:
         with open(file_name, 'r') as file:
             file_data = list(csv.reader(file))
 
-            # Checks to make sure save file is not empty and is properly formatted
-            # Raises FileNotFoundError to trigger file repair methods - should be custom error type
-            if not file_data:
-                print("Save file empty.")
-                raise FileNotFoundError
-            elif not file_data[0]:
-                print("Save file format error.")
+            # Run multiple data validation steps on file_data.
+            # Method returns a tuple that is either empty or has 3 int values
+            tmp_state = validate_save_file_data(file_data)
+            if not tmp_state:
                 raise FileNotFoundError
 
-            # Rough init method for GameState but needs to be integers
-            # If a non int is passed, object init causes sys.exit
-            g = GameState(file_data[0][0], file_data[0][1], file_data[0][2])
+            # If we have passed all checks and validations to this point it is safe to create and
+            # return our saved GameState object.
+            g = GameState(tmp_state[0], tmp_state[1], tmp_state[2])
     except FileNotFoundError:
-        # If file is missing, create save file and write default game settings
-        print("Creating new save file with default game settings.")
-        with open(file_name, 'w') as file:
-            writer = csv.writer(file)
-            writer.writerow([0, 1, 5])
+        # If file is missing or fails validation, create save file and write default game settings
+        print("Error with save data.  Creating new save file with default game settings.")
 
-        # Create a default GameState object
+        # Create a default GameState object and save to file
         g = GameState(0,1,5)
+        save_game(g, file_name)
 
     # Return GameState
     return g
 
+def validate_save_file_data(save_data):
+    # Performs validations on the save file data, returns tuple
+    # First check is the file is not empty.
+    # Second check is that there is data on the first line in the file
+    if not save_data:
+        print("Save file exists but is empty.")
+        return ()
+    elif not save_data[0]:
+        print("Save file exists but data is improperly formatted.")
+        return ()
+
+    # Third check is a try except block to validate there are 3 positive int values
+    try:
+        tmp_score = int(save_data[0][0])
+        tmp_level = int(save_data[0][1])
+        tmp_lives = int(save_data[0][2])
+
+        if tmp_score >= 0 and tmp_level >= 1 and tmp_lives > 0:
+            return tmp_score, tmp_level, tmp_lives
+        else:
+            raise Exception
+    except Exception:
+        print("Save file contains invalid information or is corrupted.")
+        return ()
 
 def save_game(game_state, file_name):
     # Saves a GameState object to save file
@@ -96,12 +116,19 @@ def save_game(game_state, file_name):
 
 def main():
     try:
-        # Load game or create new one using default setup and check save file exists and properly formatted or
-        # create new one
-        game = load_game(SAVE_FILE)
+        # Ask user if they want to Load game or start a new one
+        new_save_game = pyip.inputChoice(['yes', 'no'], prompt='Do you want to load a saved game? (yes/no): ')
+
+        if new_save_game.lower() == 'yes':
+            print("Loaded game setup: ")
+            game = load_game(SAVE_FILE)
+        else:
+            print("New game setup: ")
+            # Default GameState setup
+            game = GameState(0,1,5)
 
         # Print initial game
-        print(f"Initial game setup:\n {game}")
+        print(f"{game}")
 
         # Mess with game and print current variables
         game.next_level()
